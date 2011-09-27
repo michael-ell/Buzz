@@ -1,0 +1,15 @@
+
+src/packages/
+src/_ReSharper.Buzz.Web/
+src/_ReSharper.Buzz/
+src/Buzz.5.1.ReSharper.user
+src/Buzz.6.0.ReSharper.user
+src/Buzz.suo
+src/Buzz.Web/obj/
+src/Buzz.Domain/obj/
+src/Buzz.Commands/obj/
+src/Buzz.Events/obj/
+src/Buzz.Mashing/obj/
+src/Buzz.Tests/obj/
+src/Buzz.Web.suo
+src/Buzz.Web/Buzz.Web.csproj.user
