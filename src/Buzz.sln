@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buzz.Commands", "Buzz.Comma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buzz.Mashing", "Buzz.Mashing\Buzz.Mashing.csproj", "{B89E1095-5C4B-467F-9711-CB36DFF41C4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buzz.Specs", "Buzz.Specs\Buzz.Specs.csproj", "{9D95DFDD-D524-4B54-8FF7-BB31DB81F83A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{B89E1095-5C4B-467F-9711-CB36DFF41C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B89E1095-5C4B-467F-9711-CB36DFF41C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B89E1095-5C4B-467F-9711-CB36DFF41C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D95DFDD-D524-4B54-8FF7-BB31DB81F83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D95DFDD-D524-4B54-8FF7-BB31DB81F83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D95DFDD-D524-4B54-8FF7-BB31DB81F83A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D95DFDD-D524-4B54-8FF7-BB31DB81F83A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
