@@ -1,6 +1,6 @@
 using System;
 
-namespace Buzz.Tests.Infrastructure
+namespace Buzz.Tests.BDD
 {
     public class TimeThisAttribute : Attribute
     {

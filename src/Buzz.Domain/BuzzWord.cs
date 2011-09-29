@@ -3,11 +3,11 @@ using Ncqrs.Domain;
 
 namespace Buzz.Domain
 {
-    public class BuzzWord : AggregateRootMappedByConvention
+    public class Buzzword : AggregateRootMappedByConvention
     {
         private string _word;
 
-        public BuzzWord(string word)
+        public Buzzword(string word)
         {
             var e = new BuzzWordFoundEvent(word);
             ApplyEvent(e);

@@ -16,7 +16,7 @@
 using System;
 using Xunit;
 
-namespace Buzz.Tests.Infrastructure
+namespace Buzz.Tests.BDD
 {
     /// <summary>
     /// A concern. This attribute marks a specification to be related to a particular type.

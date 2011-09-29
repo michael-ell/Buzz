@@ -33,17 +33,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMoq">
+      <HintPath>..\packages\AutoMoq.1.6.0\lib\AutoMoq.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.1.5.0.0\Lib\.NetFramework 4.0\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.Contrib.0.3\lib\Moq.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Moq.Contrib, Version=0.1.3802.36788, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.Contrib.0.3\lib\Moq.Contrib.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration">
+      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Ncqrs">
       <HintPath>..\packages\ncqrs.0.8.0.0\lib\Ncqrs.dll</HintPath>
@@ -69,14 +84,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\BuzzWordSpecs.cs" />
-    <Compile Include="Infrastructure\ConcernAttribute.cs" />
-    <Compile Include="Infrastructure\ContextBase.cs" />
-    <Compile Include="Infrastructure\ISpecification.cs" />
-    <Compile Include="Infrastructure\ObservationAttribute.cs" />
-    <Compile Include="Infrastructure\SpecificationCommand.cs" />
+    <Compile Include="Domain\BuzzwordSpecs.cs" />
+    <Compile Include="BDD\AggregateRootSpecBase.cs" />
+    <Compile Include="BDD\ConcernAttribute.cs" />
+    <Compile Include="BDD\ContextBase.cs" />
+    <Compile Include="BDD\ISpecification.cs" />
+    <Compile Include="BDD\ObservationAttribute.cs" />
+    <Compile Include="BDD\SpecificationCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Infrastructure\TimeThisAttribute.cs" />
+    <Compile Include="BDD\TimeThisAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -86,6 +102,10 @@
     <ProjectReference Include="..\Buzz.Domain\Buzz.Domain.csproj">
       <Project>{4718B02B-4565-4FC8-862D-485D097A8FE5}</Project>
       <Name>Buzz.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Buzz.Events\Buzz.Events.csproj">
+      <Project>{B91B1703-98E0-4B20-875F-2E20CB0BCAA6}</Project>
+      <Name>Buzz.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

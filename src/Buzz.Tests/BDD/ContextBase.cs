@@ -1,14 +1,16 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
+using AutoMoq;
 using Moq;
 using Xunit.Sdk;
 
-namespace Buzz.Tests.Infrastructure
+namespace Buzz.Tests.BDD
 {
     public abstract class ContextBase<TSystemUnderTest> : ISpecification where TSystemUnderTest : class
     {
-        protected AutoMockContainer Container { get; private set; }
+        //protected AutoMockContainer Container { get; private set; }
+        protected AutoMoqer Container { get; private set; }
 
         protected TSystemUnderTest Sut { get; private set; }
 
@@ -48,14 +50,16 @@ namespace Buzz.Tests.Infrastructure
             AfterEachObservation();
         }
 
-        private AutoMockContainer CreateAutoMocker()
+        private AutoMoqer CreateAutoMocker()
         {
-            return new AutoMockContainer(new MockRepository(MockBehavior.Loose));
+            //return new AutoMockContainer(new MockRepository(MockBehavior.Loose));
+            return new AutoMoqer();
         }
 
-        protected void RegisterDependency<TDependency>(TDependency dependency)
+        protected void RegisterDependency<TDependency>(TDependency dependency) where TDependency : class
         {
-            Container.Register(dependency);
+            //Container.Register(dependency);
+            Container.SetInstance(dependency);
         }
 
         protected Mock<TDependency> MockFor<TDependency>() where TDependency : class

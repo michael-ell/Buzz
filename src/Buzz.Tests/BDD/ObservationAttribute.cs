@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Buzz.Tests.Infrastructure
+namespace Buzz.Tests.BDD
 {
     /// <summary>
     /// A specialized <see cref="FactAttribute"/> for integrating the class templates

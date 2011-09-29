@@ -3,6 +3,7 @@ using Ncqrs.Eventing.Sourcing;
 
 namespace Buzz.Events
 {
+    [Serializable]
     public class BuzzWordFoundEvent : SourcedEvent
     {
         public string Word { get; set; }

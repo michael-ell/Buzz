@@ -16,7 +16,7 @@
 using System;
 using Xunit.Sdk;
 
-namespace Buzz.Tests.Infrastructure
+namespace Buzz.Tests.BDD
 {
     /// <summary>
     /// A <see cref="ITestCommand"/> decorator which invokes methods on the specification class before and after the real test method executes.
