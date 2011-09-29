@@ -27,7 +27,8 @@ namespace Buzz.Specs.Domain
         {
             PublishedEvents.Should().HaveCount(1);
             PublishedEvents.Should().ContainItemsAssignableTo<BuzzWordFoundEvent>();
-            PublishedEvents.First().As<BuzzWordFoundEvent>().Word.Should().Be(ExpectedWord);
+            PublishedEvents.First().As<BuzzWordFoundEvent>().Word.Should().Be(ExpectedWord);            
         }
+
     }
 }
