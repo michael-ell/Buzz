@@ -18,21 +18,21 @@ namespace Buzz.Specs.Discovery
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.7.1.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Saving Events")]
-    public partial class SavingEventsFeature
+    [NUnit.Framework.DescriptionAttribute("Addition")]
+    public partial class AdditionFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "EventStore.feature"
+#line 1 "ChangingACustomersEmail.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Saving Events", "In to understand NCQRS and event stores\r\nAs a newbie\r\nI want to be to be able to " +
-                    "store events", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Addition", "In order to ensure email reaches out customer\r\nAs a owner\r\nI want to allow the cu" +
+                    "stomers email to be changed", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,18 +65,18 @@ namespace Buzz.Specs.Discovery
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Saving a single event")]
-        public virtual void SavingASingleEvent()
+        [NUnit.Framework.DescriptionAttribute("Changing a customer email address")]
+        public virtual void ChangingACustomerEmailAddress()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving a single event", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Changing a customer email address", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.Given("a new customer");
+ testRunner.Given("a customer");
 #line 8
- testRunner.When("I save the customer");
+ testRunner.When("I change the email address for the customer");
 #line 9
- testRunner.Then("new customer event should be stored");
+ testRunner.Then("the new customer should have the new email address");
 #line hidden
             this.ScenarioCleanup();
         }

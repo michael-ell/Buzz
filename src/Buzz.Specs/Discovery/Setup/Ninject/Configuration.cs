@@ -1,5 +1,10 @@
 ﻿using System.Reflection;
 using Buzz.Specs.Discovery.CommandExecutors;
+using Buzz.Specs.Discovery.Commands;
+using Buzz.Specs.Discovery.Events;
+using Buzz.Specs.Discovery.Infrastructure;
+using Buzz.Specs.Discovery.ReadModel;
+using Buzz.Specs.Discovery.ReadModel.EventHandlers;
 using Ncqrs.Commanding.ServiceModel;
 using Ncqrs.Config;
 using Ncqrs.Domain;
@@ -22,8 +27,8 @@ namespace Buzz.Specs.Discovery.Setup.Ninject
         {
             IKernel kernel = new StandardKernel();
             kernel.Bind<IEventBus>().ToProvider<EventBusProvider>();
-            kernel.Bind<IUnitOfWorkFactory>().To<UnitOfWorkFactory>();
             kernel.Bind<ICommandService>().ToProvider<CommandServiceProvider>();
+            kernel.Bind<IReadModelRepository<Customer>>().To<InMemoryRepository<Customer>>().InSingletonScope();
             return kernel;
         }
 
@@ -42,8 +47,10 @@ namespace Buzz.Specs.Discovery.Setup.Ninject
         {
             protected override IEventBus CreateInstance(IContext context)
             {
-                var bus = new InProcessEventBus();
-                bus.RegisterAllHandlersInAssembly(Assembly.GetExecutingAssembly());
+                var bus = new InProcessEventBus();               
+               // bus.RegisterAllHandlersInAssembly(Assembly.GetExecutingAssembly());
+                bus.RegisterHandler(new CustomerAddedHandler(context.Kernel.Get<IReadModelRepository<Customer>>()));
+                bus.RegisterHandler(new CustomerEmailChangedHandler(context.Kernel.Get<IReadModelRepository<Customer>>()));
                 return bus;
             }
         }
@@ -54,6 +61,7 @@ namespace Buzz.Specs.Discovery.Setup.Ninject
             {
                 var service = new CommandService();
                 service.RegisterExecutor(new AddCustomerCommandExecutor());
+                service.RegisterExecutor(new ChangeCustomerEmailCommandExecutor());
                 return service;
             }
         }

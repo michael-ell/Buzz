@@ -16,7 +16,7 @@ namespace Buzz.Specs.Discovery.Setup.Ninject
 
         public IEnvironmentConfiguration InMemoryEventStore()
         {
-            _configuration.Kernel.Bind<IEventStore>().To<InMemoryEventStore>();
+            _configuration.Kernel.Bind<IEventStore>().To<InMemoryEventStore>().InSingletonScope();
             return _configuration;         
         }
 

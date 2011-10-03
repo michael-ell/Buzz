@@ -10,6 +10,10 @@ namespace Buzz.Specs.Discovery.Domain
         private int _age;
         private string _email;
 
+        public Customer()
+        {            
+        }
+
         public Customer(string firstName, string lastName, int age, string email)
         {
             var e = new CustomerAddedEvent {Age = age, Email = email, FirstName = firstName, LastName = lastName};
@@ -22,6 +26,22 @@ namespace Buzz.Specs.Discovery.Domain
             _lastName = e.LastName;
             _age = e.Age;
             _email = e.Email;
+        }
+
+        public string MyEmail()
+        {
+            return _email;
+        }
+
+        public void ChangeEmail(string newEmail)
+        {
+            var e = new CustomerEmailChangedEvent {NewEmail = newEmail};
+            ApplyEvent(e);
+        }
+
+        protected void OnCustomerEmailChanged(CustomerEmailChangedEvent e)
+        {
+            _email = e.NewEmail;
         }
     }
 }

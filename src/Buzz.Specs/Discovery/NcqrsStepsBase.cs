@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Buzz.Specs.Discovery.Infrastructure;
 using Buzz.Specs.Discovery.Setup;
 using Ncqrs;
 using Ncqrs.Commanding;
@@ -11,7 +13,10 @@ namespace Buzz.Specs.Discovery
     {
         protected NcqrsStepsBase()
         {
-            NcqrsEnvironment.Configure(Using.Ninject().With().InMemoryEventStore());
+            if (!NcqrsEnvironment.IsConfigured)
+            {
+                NcqrsEnvironment.Configure(Using.Ninject().With().InMemoryEventStore());
+            }
         }
 
         protected void Execute(ICommand command)
@@ -20,9 +25,20 @@ namespace Buzz.Specs.Discovery
             NcqrsEnvironment.Get<ICommandService>().Execute(command);
         }
 
-        protected T GetById<T>(Guid id) where T : AggregateRoot
+        protected T GetDomainById<T>(Guid eventSourceId) where T : AggregateRoot
         {
-            return NcqrsEnvironment.Get<IUnitOfWorkContext>().GetById<T>(id);
+            var factory = NcqrsEnvironment.Get<IUnitOfWorkFactory>();
+            T domain;
+            using (var uow = factory.CreateUnitOfWork())
+            {
+                domain = uow.GetById<T>(eventSourceId);
+            }
+            return domain;
+        }
+
+        protected IEnumerable<T> GetAllReadModels<T>()
+        {
+            return NcqrsEnvironment.Get<IReadModelRepository<T>>().GetAll();
         }
     }
 }

@@ -76,23 +76,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AggregateRootStepsBase.cs" />
+    <Compile Include="Discovery\AddingACustomer.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddingACustomer.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Discovery\AddingACustomerSteps.cs" />
+    <Compile Include="Discovery\ChangingACustomersEmail.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangingACustomersEmail.feature</DependentUpon>
+    </Compile>
     <Compile Include="Discovery\CommandExecutors\AddCustomerCommandExecutor.cs" />
+    <Compile Include="Discovery\CommandExecutors\ChangeCustomerEmailCommandExecutor.cs" />
     <Compile Include="Discovery\Commands\AddCustomerCommand.cs" />
+    <Compile Include="Discovery\Commands\ChangeCustomerEmailCommand.cs" />
+    <Compile Include="Discovery\Events\CustomerEmailChangedEvent.cs" />
     <Compile Include="Discovery\ReadModel\Customer.cs" />
-    <Compile Include="Discovery\ReadModel\Denormalizers\CustomerDenormalizer.cs" />
+    <Compile Include="Discovery\ReadModel\EventHandlers\CustomerEmailChangedHandler.cs" />
+    <Compile Include="Discovery\ReadModel\EventHandlers\CustomerAddedHandler.cs" />
+    <Compile Include="Discovery\ReadModel\IIdentifiable.cs" />
     <Compile Include="Discovery\Setup\AutoFac\Configuration.cs" />
+    <Compile Include="Discovery\ChangingACustomersEmailSteps.cs" />
     <Compile Include="Discovery\Setup\IEventStoreChooser.cs" />
+    <Compile Include="Discovery\Infrastructure\InMemoryRepository.cs" />
+    <Compile Include="Discovery\Infrastructure\IReadModelRepository.cs" />
     <Compile Include="Discovery\Setup\ISetup.cs" />
     <Compile Include="Discovery\Setup\Ninject\EventStoreChooser.cs" />
+    <Compile Include="Discovery\Setup\SpecsGuidGenerator.cs" />
     <Compile Include="Discovery\Setup\Using.cs" />
     <Compile Include="Discovery\Setup\Ninject\Configuration.cs" />
     <Compile Include="Discovery\Domain\Customer.cs" />
-    <Compile Include="Discovery\EventStore.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EventStore.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Discovery\EventStoreSteps.cs" />
     <Compile Include="Discovery\Events\CustomerAddedEvent.cs" />
     <Compile Include="Discovery\NcqrsStepsBase.cs" />
     <Compile Include="Domain\Buzzword.feature.cs">
@@ -105,9 +119,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Discovery\EventStore.feature">
+    <None Include="Discovery\AddingACustomer.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>EventStore.feature.cs</LastGenOutput>
+      <LastGenOutput>AddingACustomer.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Discovery\ChangingACustomersEmail.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ChangingACustomersEmail.feature.cs</LastGenOutput>
     </None>
     <None Include="Domain\Buzzword.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
