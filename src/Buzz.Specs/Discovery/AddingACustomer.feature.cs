@@ -64,10 +64,10 @@ namespace Buzz.Specs.Discovery
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Adding a customer that does not already exits")]
-        public virtual void AddingACustomerThatDoesNotAlreadyExits()
+        [NUnit.Framework.DescriptionAttribute("Adding a customer that does not already exists")]
+        public virtual void AddingACustomerThatDoesNotAlreadyExists()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding a customer that does not already exits", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding a customer that does not already exists", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -78,6 +78,23 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Then("the new customer should be viewable");
 #line 10
  testRunner.And("should be able to rebuild the customer");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Adding a customer that already exists")]
+        public virtual void AddingACustomerThatAlreadyExists()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding a customer that already exists", ((string[])(null)));
+#line 12
+this.ScenarioSetup(scenarioInfo);
+#line 13
+ testRunner.Given("a customer that has already registered");
+#line 14
+ testRunner.When("the same customer is trying to be added");
+#line 15
+ testRunner.Then("the customer should not be added twice");
 #line hidden
             this.ScenarioCleanup();
         }

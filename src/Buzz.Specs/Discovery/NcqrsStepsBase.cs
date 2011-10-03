@@ -15,7 +15,7 @@ namespace Buzz.Specs.Discovery
         {
             if (!NcqrsEnvironment.IsConfigured)
             {
-                NcqrsEnvironment.Configure(Using.Ninject().With().InMemoryEventStore());
+                NcqrsEnvironment.Configure(Using.Ninject().With().MongoEventStore());
             }
         }
 

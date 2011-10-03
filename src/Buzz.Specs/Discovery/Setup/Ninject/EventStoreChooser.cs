@@ -1,4 +1,5 @@
 ﻿using System;
+using Buzz.Specs.Discovery.Infrastructure;
 using Ncqrs.Config;
 using Ncqrs.Eventing.Storage;
 
@@ -22,7 +23,8 @@ namespace Buzz.Specs.Discovery.Setup.Ninject
 
         public IEnvironmentConfiguration MongoEventStore()
         {
-            throw new NotImplementedException();
+            _configuration.Kernel.Bind<IEventStore>().To<MongoDBEventStore>().InSingletonScope();
+            return _configuration;
         }
 
         public IEnvironmentConfiguration SqlServerEventStore()

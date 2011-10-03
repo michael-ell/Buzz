@@ -1,13 +1,9 @@
-﻿using System.Reflection;
-using Buzz.Specs.Discovery.CommandExecutors;
-using Buzz.Specs.Discovery.Commands;
-using Buzz.Specs.Discovery.Events;
+﻿using Buzz.Specs.Discovery.CommandExecutors;
 using Buzz.Specs.Discovery.Infrastructure;
 using Buzz.Specs.Discovery.ReadModel;
 using Buzz.Specs.Discovery.ReadModel.EventHandlers;
 using Ncqrs.Commanding.ServiceModel;
 using Ncqrs.Config;
-using Ncqrs.Domain;
 using Ncqrs.Eventing.ServiceModel.Bus;
 using Ninject;
 using Ninject.Activation;
