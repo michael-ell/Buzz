@@ -2,8 +2,10 @@
 using Buzz.Specs.Discovery.Infrastructure;
 using Buzz.Specs.Discovery.ReadModel;
 using Buzz.Specs.Discovery.ReadModel.EventHandlers;
+using Ncqrs;
 using Ncqrs.Commanding.ServiceModel;
 using Ncqrs.Config;
+using Ncqrs.Domain;
 using Ncqrs.Eventing.ServiceModel.Bus;
 using Ninject;
 using Ninject.Activation;
@@ -22,7 +24,9 @@ namespace Buzz.Specs.Discovery.Setup.Ninject
         private IKernel CreateKernel()
         {
             IKernel kernel = new StandardKernel();
-            kernel.Bind<IEventBus>().ToProvider<EventBusProvider>();
+            NcqrsEnvironment.RemoveDefault<IUnitOfWorkFactory>();
+            kernel.Bind<IUnitOfWorkFactory>().To<Infrastructure.UnitOfWorkFactory>();
+            kernel.Bind<IEventBus>().ToProvider<EventBusProvider>();            
             kernel.Bind<ICommandService>().ToProvider<CommandServiceProvider>();
             kernel.Bind<IReadModelRepository<Customer>>().To<InMemoryRepository<Customer>>().InSingletonScope();
             return kernel;
@@ -44,6 +48,7 @@ namespace Buzz.Specs.Discovery.Setup.Ninject
             protected override IEventBus CreateInstance(IContext context)
             {
                 var bus = new InProcessEventBus();               
+                //TODO: use the factory method below...
                // bus.RegisterAllHandlersInAssembly(Assembly.GetExecutingAssembly());
                 bus.RegisterHandler(new CustomerAddedHandler(context.Kernel.Get<IReadModelRepository<Customer>>()));
                 bus.RegisterHandler(new CustomerEmailChangedHandler(context.Kernel.Get<IReadModelRepository<Customer>>()));

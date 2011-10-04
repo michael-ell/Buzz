@@ -77,6 +77,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -104,7 +105,9 @@
     <Compile Include="Discovery\Commands\AddCustomerCommand.cs" />
     <Compile Include="Discovery\Commands\ChangeCustomerEmailCommand.cs" />
     <Compile Include="Discovery\Events\CustomerEmailChangedEvent.cs" />
+    <Compile Include="Discovery\Infrastructure\NonPublishingDomainRepository.cs" />
     <Compile Include="Discovery\Infrastructure\MongoDBEventStore.cs" />
+    <Compile Include="Discovery\Infrastructure\UnitOfWorkFactory.cs" />
     <Compile Include="Discovery\ReadModel\Customer.cs" />
     <Compile Include="Discovery\ReadModel\EventHandlers\CustomerEmailChangedHandler.cs" />
     <Compile Include="Discovery\ReadModel\EventHandlers\CustomerAddedHandler.cs" />
