@@ -84,13 +84,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\IPublishedEventsViewer.cs" />
     <Compile Include="Domain\BuzzwordSpecs.cs" />
-    <Compile Include="BDD\AggregateRootSpecBase.cs" />
+    <Compile Include="Helpers\AggregateRootSpecBase.cs" />
     <Compile Include="BDD\ConcernAttribute.cs" />
     <Compile Include="BDD\ContextBase.cs" />
     <Compile Include="BDD\ISpecification.cs" />
     <Compile Include="BDD\ObservationAttribute.cs" />
     <Compile Include="BDD\SpecificationCommand.cs" />
+    <Compile Include="Domain\FeedSpecs.cs" />
+    <Compile Include="Mashing\UrlParserSpecs.cs" />
+    <Compile Include="Helpers\NullEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BDD\TimeThisAttribute.cs" />
   </ItemGroup>
@@ -106,6 +110,14 @@
     <ProjectReference Include="..\Buzz.Events\Buzz.Events.csproj">
       <Project>{B91B1703-98E0-4B20-875F-2E20CB0BCAA6}</Project>
       <Name>Buzz.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Buzz.Infrastructure\Buzz.Infrastructure.csproj">
+      <Project>{BB15BBFE-CA44-40DC-8F9E-F74755CDE3DC}</Project>
+      <Name>Buzz.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Buzz.Mashing\Buzz.Mashing.csproj">
+      <Project>{B89E1095-5C4B-467F-9711-CB36DFF41C4A}</Project>
+      <Name>Buzz.Mashing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

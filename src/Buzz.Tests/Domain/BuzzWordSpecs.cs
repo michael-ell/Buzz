@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using Buzz.Domain;
+﻿using Buzz.Domain;
 using Buzz.Events;
 using Buzz.Tests.BDD;
-using FluentAssertions;
+using Buzz.Tests.Helpers;
 
 namespace Buzz.Tests.Domain.BuzzwordSpecs
 {
@@ -24,9 +23,7 @@ namespace Buzz.Tests.Domain.BuzzwordSpecs
         [Observation]
         public void Then_should_announce_that_a_buzz_word_was_found()
         {
-            PublishedEvents.Should().HaveCount(1);
-            PublishedEvents.Should().ContainItemsAssignableTo<BuzzWordFoundEvent>();
-            PublishedEvents.First().As<BuzzWordFoundEvent>().Word.Should().Be(ExpectedWord);
+            Verify<BuzzwordFoundEvent>(e => e.Word == ExpectedWord).WasPublished();
         }
     }
 }

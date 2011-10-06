@@ -31,7 +31,7 @@ namespace Buzz.Tests.BDD
         /// </summary>
         /// <param name="innerCommand">The inner command.</param>
         /// <param name="testMethod">The test method.</param>
-        public SpecificationCommand(ITestCommand innerCommand, IMethodInfo testMethod) : base(testMethod, innerCommand.DisplayName, 5000)
+        public SpecificationCommand(ITestCommand innerCommand, IMethodInfo testMethod) : base(testMethod, innerCommand.DisplayName, 20000)
         {
             _innerCommand = innerCommand;
         }

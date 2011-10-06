@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buzzword.cs" />
+    <Compile Include="Feed.cs" />
+    <Compile Include="IEvaluator.cs" />
+    <Compile Include="IUrlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

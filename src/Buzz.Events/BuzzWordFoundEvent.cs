@@ -4,11 +4,11 @@ using Ncqrs.Eventing.Sourcing;
 namespace Buzz.Events
 {
     [Serializable]
-    public class BuzzWordFoundEvent : SourcedEvent
+    public class BuzzwordFoundEvent : SourcedEvent
     {
         public string Word { get; set; }
 
-        public BuzzWordFoundEvent(string word)
+        public BuzzwordFoundEvent(string word)
         {
             if (word == null) throw new ArgumentNullException("word");
             Word = word;

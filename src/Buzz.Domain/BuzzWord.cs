@@ -9,11 +9,11 @@ namespace Buzz.Domain
 
         public Buzzword(string word)
         {
-            var e = new BuzzWordFoundEvent(word);
+            var e = new BuzzwordFoundEvent(word);
             ApplyEvent(e);
         }
 
-        protected void OnBuzzWordFound(BuzzWordFoundEvent e)
+        protected void OnBuzzWordFound(BuzzwordFoundEvent e)
         {
             _word = e.Word;
         }

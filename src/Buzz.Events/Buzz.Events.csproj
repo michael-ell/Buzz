@@ -51,7 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuzzWordFoundEvent.cs" />
+    <Compile Include="BuzzwordFoundEvent.cs" />
+    <Compile Include="FeedRegisteredEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
