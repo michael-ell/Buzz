@@ -4,6 +4,7 @@ using System.Linq;
 using EventStore;
 using EventStore.Dispatcher;
 using EventStore.Serialization;
+using Ncqrs.Eventing;
 using Ncqrs.Eventing.ServiceModel.Bus;
 using Ncqrs.Eventing.Sourcing;
 using Ncqrs.Eventing.Storage;
@@ -27,43 +28,48 @@ namespace Buzz.Specs.Discovery.Infrastructure
                            .Build();
         }
 
-        public IEnumerable<SourcedEvent> GetAllEvents(Guid id)
+        public CommittedEventStream ReadFrom(Guid id, long minVersion, long maxVersion)
         {
-            using (var stream = _store.OpenStream(id, 0, int.MaxValue))
+            using (var stream = _store.OpenStream(id, (int)minVersion, (int)maxVersion))
             {
-                return ToSourcedEvents(stream.CommittedEvents);
+                return ToCommitedEventStream(id, stream.CommittedEvents);
             }
         }
 
-        public IEnumerable<SourcedEvent> GetAllEventsSinceVersion(Guid id, long version)
+        public void Store(UncommittedEventStream eventStream)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Save(IEventSource source)
-        {
-            using (var stream = _store.OpenStream(source.EventSourceId, 0, int.MaxValue))
+            using (var stream = _store.OpenStream(eventStream.SourceId, 0, int.MaxValue))
             {
-                foreach (var uncommittedEvent in source.GetUncommittedEvents())
+                foreach (var uncommittedEvent in eventStream)
                 {
-                    stream.Add(new EventMessage { Body = uncommittedEvent });
+                    var eventMessage = new EventMessage{ Body = uncommittedEvent.Payload };
+                    eventMessage.Headers["commitId"] = eventStream.CommitId;
+                    stream.Add(eventMessage);
                 }
-                stream.CommitChanges(Guid.NewGuid());
+                //stream.CommitChanges(Guid.NewGuid());
+                stream.CommitChanges(eventStream.CommitId);
             }
         }
 
         public void Dispatch(Commit commit)
         {
-            _bus.Publish(ToSourcedEvents(commit.Events));
+            _bus.Publish(ToCommitedEventStream(commit.StreamId, commit.Events));
         }
 
         public void Dispose()
         {
         }
 
-        private IEnumerable<SourcedEvent> ToSourcedEvents(IEnumerable<EventMessage> events)
+        private CommittedEventStream ToCommitedEventStream(Guid sourceId, IEnumerable<EventMessage> events)
         {
-            return events == null ? new List<SourcedEvent>() : events.Select(e => e.Body as SourcedEvent);
+            var committedEventStream = new CommittedEventStream(sourceId, events == null ? new List<CommittedEvent>() : events.Select(ToCommittedEvent));
+            return committedEventStream;
+        }
+
+        private CommittedEvent ToCommittedEvent(EventMessage eventMessage)
+        {
+            var e = (SourcedEvent)eventMessage.Body;
+            return new CommittedEvent((Guid) eventMessage.Headers["commitId"], e.EventIdentifier, e.EventSourceId, e.EventSequence, e.EventTimeStamp, e, e.EventVersion);
         }
     }
 }

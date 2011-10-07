@@ -1,7 +1,6 @@
 ﻿using System;
 using Buzz.Specs.Discovery.Events;
 using Buzz.Specs.Discovery.Infrastructure;
-using Buzz.Specs.Discovery.Setup;
 using Ncqrs.Eventing.ServiceModel.Bus;
 
 namespace Buzz.Specs.Discovery.ReadModel.EventHandlers
@@ -16,10 +15,10 @@ namespace Buzz.Specs.Discovery.ReadModel.EventHandlers
             _repository = repository;
         }
 
-        public void Handle(CustomerAddedEvent evnt)
+        public void Handle(IPublishedEvent<CustomerAddedEvent> evnt)
         {
-            var customer = new Customer {Id = evnt.EventSourceId, Name = string.Format("{0},{1}", evnt.LastName, evnt.FirstName), Email = evnt.Email};
-            _repository.Save(customer);            
+            var customer = new Customer { Id = evnt.EventSourceId, Name = string.Format("{0},{1}", evnt.Payload.LastName, evnt.Payload.FirstName), Email = evnt.Payload.Email };
+            _repository.Save(customer);     
         }
     }
 }

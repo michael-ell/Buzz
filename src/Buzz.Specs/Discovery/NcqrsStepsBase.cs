@@ -6,6 +6,7 @@ using Ncqrs;
 using Ncqrs.Commanding;
 using Ncqrs.Commanding.ServiceModel;
 using Ncqrs.Domain;
+using Ncqrs.Domain.Storage;
 
 namespace Buzz.Specs.Discovery
 {
@@ -29,7 +30,7 @@ namespace Buzz.Specs.Discovery
         {
             var factory = NcqrsEnvironment.Get<IUnitOfWorkFactory>();
             T domain;
-            using (var uow = factory.CreateUnitOfWork())
+            using (var uow = factory.CreateUnitOfWork(eventSourceId))
             {
                 domain = uow.GetById<T>(eventSourceId);
             }

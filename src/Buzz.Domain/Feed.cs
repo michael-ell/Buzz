@@ -31,5 +31,10 @@ namespace Buzz.Domain
                 ApplyEvent(new BuzzwordFoundEvent(buzzword));
             }
         }
+
+        protected void OnBuzzwordFound(BuzzwordFoundEvent @event)
+        {
+            //Apparently ncqrs requires a handler for any events applied with the aggregate root
+        }
     }
 }

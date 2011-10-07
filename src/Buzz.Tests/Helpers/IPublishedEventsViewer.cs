@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Ncqrs.Eventing.Sourcing;
+using Ncqrs.Eventing;
 
 namespace Buzz.Tests.Helpers
 {
     public interface IPublishedEventsViewer
     {
-        IEnumerable<SourcedEvent> PublishedEvents { get; }
+        IEnumerable<UncommittedEvent> PublishedEvents { get; }
     }
 }

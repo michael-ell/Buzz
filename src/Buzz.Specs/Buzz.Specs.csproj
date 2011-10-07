@@ -48,7 +48,7 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.1.5.0.0\Lib\.NetFramework 4.0\FluentAssertions.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson">
@@ -57,11 +57,12 @@
     <Reference Include="MongoDB.Driver">
       <HintPath>..\packages\mongocsharpdriver.1.2\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="Ncqrs">
-      <HintPath>..\packages\ncqrs.0.8.0.0\lib\Ncqrs.dll</HintPath>
+    <Reference Include="Ncqrs, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MasterNcqrs.1.1\lib\Ncqrs.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.3.5.8\lib\35\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.0.1\lib\40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
@@ -105,8 +106,8 @@
     <Compile Include="Discovery\Commands\AddCustomerCommand.cs" />
     <Compile Include="Discovery\Commands\ChangeCustomerEmailCommand.cs" />
     <Compile Include="Discovery\Events\CustomerEmailChangedEvent.cs" />
-    <Compile Include="Discovery\Infrastructure\NonPublishingDomainRepository.cs" />
     <Compile Include="Discovery\Infrastructure\MongoDBEventStore.cs" />
+    <Compile Include="Discovery\Infrastructure\NonPublishingEventBus.cs" />
     <Compile Include="Discovery\Infrastructure\UnitOfWorkFactory.cs" />
     <Compile Include="Discovery\ReadModel\Customer.cs" />
     <Compile Include="Discovery\ReadModel\EventHandlers\CustomerEmailChangedHandler.cs" />
@@ -125,12 +126,6 @@
     <Compile Include="Discovery\Domain\Customer.cs" />
     <Compile Include="Discovery\Events\CustomerAddedEvent.cs" />
     <Compile Include="Discovery\NcqrsStepsBase.cs" />
-    <Compile Include="Domain\Buzzword.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Buzzword.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\BuzzwordSteps.cs" />
     <Compile Include="Mashing\ParsingWebPages.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -150,10 +145,6 @@
     <None Include="Discovery\ChangingACustomersEmail.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ChangingACustomersEmail.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Domain\Buzzword.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Buzzword.feature.cs</LastGenOutput>
     </None>
     <None Include="Mashing\ParsingWebPages.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

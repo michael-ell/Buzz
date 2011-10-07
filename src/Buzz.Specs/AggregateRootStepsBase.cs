@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using Ncqrs.Domain;
 using Ncqrs.Domain.Storage;
-using Ncqrs.Eventing.Sourcing;
+using Ncqrs.Eventing;
 
 namespace Buzz.Specs
 {
     public abstract class AggregateRootStepsBase<TRoot> where TRoot : AggregateRoot
     {
         private TRoot _sut;
+        private readonly List<UncommittedEvent> _publishedEvents;
 
         protected IAggregateRootCreationStrategy CreationStrategy { get; set; }
 
@@ -23,19 +24,22 @@ namespace Buzz.Specs
             set { _sut = value ?? CreateSut(); }
         }
 
-        protected IEnumerable<SourcedEvent> PublishedEvents
+        protected IEnumerable<UncommittedEvent> PublishedEvents
         {
-            get { return Sut.GetUncommittedEvents() ?? new List<SourcedEvent>(); }
+            get { return _publishedEvents; }            
         }
 
-        public AggregateRootStepsBase()
+        protected AggregateRootStepsBase()
         {
-                CreationStrategy = new SimpleAggregateRootCreationStrategy();
+            CreationStrategy = new SimpleAggregateRootCreationStrategy();
+            _publishedEvents = new List<UncommittedEvent>();
         }
 
         protected virtual TRoot CreateSut()
         {
-            return CreationStrategy.CreateAggregateRoot<TRoot>();
+            var root = CreationStrategy.CreateAggregateRoot<TRoot>();
+            root.EventApplied += (s, e) => _publishedEvents.Add(e.Event);
+            return root;
         }
     }
 }

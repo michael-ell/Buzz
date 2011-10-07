@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using Buzz.Domain;
 using Buzz.Events;
 using Buzz.Tests.BDD;
@@ -39,7 +40,6 @@ namespace Buzz.Tests.Domain.FeedSpecs
 
         protected override void Given()
         {
-            EventBus.RegisterHandler(new NullEventHandler<BuzzwordFoundEvent>());
             const string url = "www.some.feed.com";
             Sut.Register(url, "some description");
             _shouldBeBuzzword = "Shillelagh";

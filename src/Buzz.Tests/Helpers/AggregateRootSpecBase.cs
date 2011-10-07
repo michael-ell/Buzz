@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Buzz.Tests.BDD;
 using FluentAssertions;
-using Ncqrs;
 using Ncqrs.Domain;
 using Ncqrs.Domain.Storage;
-using Ncqrs.Eventing.ServiceModel.Bus;
+using Ncqrs.Eventing;
 using Ncqrs.Eventing.Sourcing;
 
 namespace Buzz.Tests.Helpers
@@ -14,19 +13,17 @@ namespace Buzz.Tests.Helpers
     public abstract class AggregateRootSpecBase<TRoot> :  ContextBase<TRoot>, IPublishedEventsViewer where TRoot : AggregateRoot
     {
         protected IAggregateRootCreationStrategy CreationStrategy { get; set; }
-        protected InProcessEventBus EventBus
-        {
-            get { return NcqrsEnvironment.Get<IEventBus>().As<InProcessEventBus>(); }
-        }
+        private readonly List<UncommittedEvent> _publishedEvents;
 
-        public IEnumerable<SourcedEvent> PublishedEvents
+        public IEnumerable<UncommittedEvent> PublishedEvents
         {
-            get { return Sut.GetUncommittedEvents() ?? new List<SourcedEvent>(); }
+            get { return _publishedEvents; }
         }
 
         protected AggregateRootSpecBase()
         {
             CreationStrategy = new SimpleAggregateRootCreationStrategy();
+            _publishedEvents = new List<UncommittedEvent>();
         }
 
         //protected virtual IEnumerable<SourcedEvent> History()
@@ -37,6 +34,7 @@ namespace Buzz.Tests.Helpers
         protected override TRoot CreateSut()
         {
             var root = CreationStrategy.CreateAggregateRoot<TRoot>();
+            root.EventApplied += (s, e) => _publishedEvents.Add(e.Event);
             //root.InitializeFromHistory(History());
             return root;
         }
@@ -61,7 +59,8 @@ namespace Buzz.Tests.Helpers
 
             private IEnumerable<TEvent> EventsOfInterest
             {
-                get { return _viewer.PublishedEvents.Where(e => e.GetType().Equals(typeof (TEvent))).Cast<TEvent>(); }
+                get { return _viewer.PublishedEvents.Where(e => e.Payload.GetType().Equals(typeof (TEvent)))
+                                                    .Select(e => e.Payload).Cast<TEvent>(); }
             }
 
             public void WasPublished()

@@ -24,7 +24,7 @@ namespace Buzz.Specs.Discovery.Setup.Ninject
 
         public IEnvironmentConfiguration MongoEventStore()
         {
-            _configuration.Kernel.Bind<IDomainRepository>().To<NonPublishingDomainRepository>();
+            //_configuration.Kernel.Bind<IDomainRepository>().To<NonPublishingDomainRepository>();
             _configuration.Kernel.Bind<IEventStore>().To<MongoDBEventStore>().InSingletonScope();
             return _configuration;
         }
